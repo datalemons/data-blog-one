@@ -1,24 +1,71 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
+import { css } from "react-emotion"
+import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
 
-export default ({ data }) => (
-  <Layout>
-    <h1>Welcome to {data.site.siteMetadata.title}</h1>
-    <div>
-      <img
-        src="https://www.nieuws.social/strategie_nieuws/wp-content/uploadsnieuwssocial/2018/10/eee-1.jpg"
-        alt="Data Lemons: a blog about data for everyone"
-      />
-    </div>
-  </Layout>
-)
+export default ({ data }) => {
+  console.log(data)
+  return (
+    <Layout>
+      <div>
+        <h1
+          className={css`
+            display: inline-block;
+            border-bottom: 1px solid;
+          `}
+        >
+          DataLemons
+        </h1>
+        <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+        {data.allMarkdownRemark.edges.map(({ node }) => (
+          <div key={node.id}>
+          <Link
+              to={node.fields.slug}
+              className={css`
+                text-decoration: none;
+                color: inherit;
+              `}
+            >
+              <h3
+                className={css`
+                  margin-bottom: ${rhythm(1 / 4)};
+                `}
+              >
+                {node.frontmatter.title}{" "}
+                <span
+                  className={css`
+                    color: #bbb;
+                  `}
+                >
+                  — {node.frontmatter.date}
+                </span>
+              </h3>
+              <p>{node.excerpt}</p>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query {
-    site {
-      siteMetadata {
-        title
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD MMMM, YYYY")
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
       }
     }
   }
