@@ -1,0 +1,25 @@
+.header-title {
+    size: 18px;
+    color: rgb(202, 199, 0);
+    font-weight: bold;
+}
+
+.description {
+    size: 14px;
+    color: black;
+}
+
+.link {
+    color: forestgreen;
+    float: right;
+    font-style: normal;
+    list-style: none;
+    margin-right: 1rem;
+}
+
+.link-in-text {
+    color: forestgreen;
+    float:  none;
+    font-style: normal;
+    list-style: none;
+}

@@ -1,6 +1,7 @@
 import React from "react"
 import { css } from "react-emotion"
-import { StaticQuery, Link, graphql } from "gatsby"
+import { StaticQuery, Link, graphql } from "gatsby" 
+import "../components/styles.css"
 
 import { rhythm } from "../utils/typography"
 
@@ -25,8 +26,8 @@ export default ({ children }) => (
       <div
         className={css`
           margin: 0 auto;
-          max-width: 75%;
-          padding: ${rhythm(2)};
+          max-width: 50%;
+          padding: ${rhythm(1)};
           padding-top: ${rhythm(1.5)};
         `}
       >
@@ -41,10 +42,9 @@ export default ({ children }) => (
             {data.site.siteMetadata.title}
           </h3>
         </Link>
-        <ul style={{ listStyle: `none`, float: `right` }}>
-          <ListLink to="/about/">About</ListLink>
-          <ListLink to="/contact/">Contact</ListLink>
-        </ul>
+        <Link to="/resources/" className="link">Resources</Link>
+        <Link to="/contact/" className="link">Contact</Link>
+        <Link to="/about/" className="link">About</Link>
         {children}
       </div>
     )}

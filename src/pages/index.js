@@ -3,6 +3,9 @@ import { Link, graphql } from "gatsby"
 import { css } from "react-emotion"
 import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
+import "../components/styles.css"
+
+import Bio from "../components/bio-blurb"
 
 export default ({ data }) => {
   console.log(data)
@@ -12,11 +15,11 @@ export default ({ data }) => {
         <h1
           className={css`
             display: inline-block;
-            border-bottom: 1px solid;
           `}
         >
-          DataLemons
+          <span className="header-title">DataLemons</span>
         </h1>
+        <Bio />
         <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
         {data.allMarkdownRemark.edges.map(({ node }) => (
           <div key={node.id}>
